@@ -156,15 +156,71 @@ svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .thumb .ta{display:flex;gap:0}
 .thumb .add{aspect-ratio:1000/1414;width:100%;border:1.5px dashed var(--rule);border-radius:6px;background:transparent;cursor:pointer;color:var(--fg2);display:grid;place-items:center}
 .vh{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden}
+
+/* library: folders and the path back up */
+.crumbs{display:flex;align-items:center;flex-wrap:wrap;gap:2px;margin:-14px 0 18px;font-size:14px;color:var(--fg2)}
+.crumbs button{appearance:none;border:0;background:transparent;color:var(--accent);font-size:14px;min-height:36px;padding:0 6px;border-radius:8px;cursor:pointer}
+.crumbs span{padding:0 2px}
+.card .fcover{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:var(--bar2);color:var(--accent);border-radius:12px;box-shadow:0 0 0 1px var(--rule),0 6px 18px var(--pshadow)}
+.card .fcover svg{width:58px;height:58px;stroke-width:1.3}
+.card .fcover .fc{font-size:13px;color:var(--fg2);font-family:var(--mono)}
+.opts .btn svg{width:20px;height:20px}
+.field select{width:100%;font:inherit;font-size:16px;min-height:44px;padding:0 12px;border-radius:10px;border:1px solid var(--rule);background:var(--desk);color:var(--fg)}
+.blist{display:flex;flex-direction:column;gap:6px}
+.blist button{appearance:none;border:1px solid var(--rule);background:transparent;border-radius:12px;min-height:52px;padding:6px 14px;text-align:left;cursor:pointer;display:flex;flex-direction:column;justify-content:center}
+.blist button[aria-current="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.blist .bt{font-size:15px;font-weight:500}
+.blist .bm{font-size:12px;color:var(--fg2)}
+
+/* recent notebooks as tabs under the toolbar */
+.tabs{display:flex;align-items:center;gap:6px;flex:0 0 auto;overflow-x:auto;scrollbar-width:none;
+  padding:0 max(10px,env(safe-area-inset-right)) 8px max(10px,env(safe-area-inset-left))}
+.tabs::-webkit-scrollbar{display:none}
+.tab{display:flex;align-items:center;flex:0 0 auto;max-width:240px;height:38px;border-radius:11px;background:var(--chip);border:1px solid transparent}
+.tab[aria-current="true"]{background:var(--bar2);border-color:var(--rule);box-shadow:0 1px 3px var(--pshadow)}
+.tab .tt{appearance:none;border:0;background:transparent;height:100%;min-width:0;padding:0 2px 0 13px;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;color:var(--fg2)}
+.tab[aria-current="true"] .tt{color:var(--fg);font-weight:500}
+.tab .ib{width:34px;height:34px}
+.tab .ib svg{width:14px;height:14px}
+
+/* lasso in locked mode */
+.ib .lkb{position:absolute;right:2px;bottom:2px;width:17px;height:17px;border-radius:50%;background:var(--bar);color:var(--fg);display:grid;place-items:center}
+.ib .lkb svg{width:12px;height:12px;stroke-width:2.1}
+.ib[aria-pressed="true"] .lkb{background:var(--accent-fg);color:var(--accent)}
+
+/* custom colour picker inside the tool panel */
+.picker{margin-top:10px;padding:12px;border:1px solid var(--rule);border-radius:14px}
+.picker canvas{display:block;width:100%;border-radius:8px;touch-action:none;cursor:crosshair}
+.picker .sv{height:150px}
+.picker .hue{height:28px;margin-top:10px}
+.picker .prow{display:flex;align-items:center;gap:8px;margin-top:10px}
+.picker .psw{width:36px;height:36px;border-radius:50%;flex:0 0 auto;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
+.picker input{flex:1 1 auto;min-width:0;font-family:var(--mono);font-size:16px;height:40px;padding:0 10px;border-radius:10px;border:1px solid var(--rule);background:var(--desk);color:var(--fg);text-transform:uppercase}
+.picker .acts{margin-top:10px}
+.picker .acts .btn{flex:1 1 0}
+
+/* image crop */
+.crop-stage{display:flex;justify-content:center;padding:18px;margin:0 0 6px}
+.crop-wrap{position:relative;touch-action:none;-webkit-user-select:none;user-select:none}
+.crop-clip{position:absolute;inset:0;overflow:hidden;border-radius:3px;background:repeating-conic-gradient(#ccc 0 25%,#eee 0 50%) 0 0/16px 16px}
+.crop-clip img{display:block;width:100%;height:100%;pointer-events:none;-webkit-user-drag:none}
+.crop-shade{position:absolute;box-shadow:0 0 0 9999px rgba(0,0,0,.55);pointer-events:none}
+.crop-box{position:absolute;outline:1.5px solid #fff;cursor:move}
+.crop-box::before,.crop-box::after{content:"";position:absolute;pointer-events:none;border:0 solid rgba(255,255,255,.5)}
+.crop-box::before{left:33.33%;right:33.33%;top:0;bottom:0;border-left-width:1px;border-right-width:1px}
+.crop-box::after{top:33.33%;bottom:33.33%;left:0;right:0;border-top-width:1px;border-bottom-width:1px}
+.crop-h{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;z-index:2}
+.crop-h::after{content:"";position:absolute;left:14px;top:14px;width:16px;height:16px;border-radius:4px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.45)}
 </style>
 </head>
 <body>
 <section id="library" class="screen">
   <div class="lib">
-    <header class="lib-head"><h1>筆記</h1><div class="lh-acts"><button class="btn" id="backup" type="button">備份／還原</button><button class="btn" id="imp-pdf" type="button">匯入 PDF</button><button class="btn primary" id="new-book" type="button"></button></div></header>
+    <header class="lib-head"><h1 id="lib-title">筆記</h1><div class="lh-acts"><button class="btn" id="backup" type="button">備份／還原</button><button class="btn" id="imp-pdf" type="button">匯入 PDF</button><button class="btn primary" id="new-book" type="button"></button></div></header>
+    <nav class="crumbs" id="crumbs" aria-label="資料夾路徑" hidden></nav>
     <p class="warn" id="db-warn" hidden>這個瀏覽器不能存檔，關掉頁面筆記就會不見。</p>
     <div class="shelf" id="shelf"></div>
-    <div class="empty" id="empty" hidden><p>還沒有筆記本</p><button class="btn primary" id="new-book2" type="button">建立第一本</button></div>
+    <div class="empty" id="empty" hidden><p id="empty-msg">還沒有筆記本</p><button class="btn primary" id="new-book2" type="button">建立第一本</button></div>
     <p class="lib-foot">筆記存在這台 iPad 的「手寫筆記」App 裡，不會上傳。建議每週按「備份／還原」存一份備份到「檔案」或 iCloud。兩指點一下＝復原，三指點一下＝重做。</p>
   </div>
 </section>
@@ -197,6 +253,7 @@ svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
       <button class="ib" id="b-more" type="button" aria-label="筆記本設定"></button>
     </div>
   </header>
+  <nav class="tabs" id="tabs" aria-label="最近打開的筆記本"></nav>
   <div id="stage">
     <canvas id="base" aria-label="筆記頁面"></canvas>
     <canvas id="live" aria-hidden="true"></canvas>
@@ -207,6 +264,9 @@ svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
       <button type="button" data-act="copy">拷貝</button>
       <button type="button" data-act="dup">再製</button>
       <button type="button" data-act="color">換成筆的顏色</button>
+      <button type="button" data-act="crop">裁剪</button>
+      <button type="button" data-act="lock">鎖定</button>
+      <button type="button" data-act="unlock">解鎖</button>
     </div>
     <button class="btn" id="paste" type="button" hidden>貼上</button>
   </div>
@@ -215,8 +275,7 @@ svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 <div id="panel" hidden></div>
 <div id="toast" role="status"></div>
 <input type="file" id="file" accept="image/*" class="vh" tabindex="-1">
-<input type="color" id="colorIn" class="vh" tabindex="-1">
-<input type="file" id="pdfIn" accept="application/pdf,.pdf" class="vh" tabindex="-1">
+<input type="file" id="pdfIn" accept="application/pdf,.pdf" multiple class="vh" tabindex="-1">
 <input type="file" id="bkIn" accept="application/json,.json,text/plain" class="vh" tabindex="-1">
 
 <script>
@@ -264,7 +323,10 @@ const IC = {
   trash: '<path d="M4.5 7h15"/><path d="M9.5 7V4.8h5V7"/><path d="M6.5 7l.9 12.2a1.6 1.6 0 0 0 1.6 1.3h6a1.6 1.6 0 0 0 1.6-1.3L17.5 7"/>',
   natural: '<path d="M4 20l1.1-4.4L15.6 5.1a2 2 0 0 1 2.8 0l.5.5a2 2 0 0 1 0 2.8L8.4 18.9z"/>',
   ball: '<path d="M7 17l1.6-5.2 7.6-7.6a1.8 1.8 0 0 1 2.6 0l1 1a1.8 1.8 0 0 1 0 2.6l-7.6 7.6z"/><circle cx="5.6" cy="18.4" r="1.4"/>',
-  callig: '<path d="M12 3l5.5 6.5L14.5 20h-5L6.5 9.5z"/><path d="M12 3v7.5"/><circle cx="12" cy="12" r="1.3"/>'
+  callig: '<path d="M12 3l5.5 6.5L14.5 20h-5L6.5 9.5z"/><path d="M12 3v7.5"/><circle cx="12" cy="12" r="1.3"/>',
+  folder: '<path d="M3.5 7.5a2 2 0 0 1 2-2h4l2 2.2h7a2 2 0 0 1 2 2v7.8a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/>',
+  book: '<path d="M5 4.5h11a2 2 0 0 1 2 2v13H7a2 2 0 0 1-2-2z"/><path d="M5 17.5a2 2 0 0 1 2-2h11"/><path d="M9 8.5h5"/>',
+  lock: '<rect x="5.5" y="10.5" width="13" height="9.5" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/>'
 };
 const svg = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${IC[k]}</svg>`;
 
@@ -281,12 +343,13 @@ function segDist(px, py, ax, ay, bx, by){
 }
 function ls(k, d){ try{ const v = localStorage.getItem('nb-' + k); return v == null ? d : JSON.parse(v); }catch(e){ return d; } }
 function lss(k, v){ try{ localStorage.setItem('nb-' + k, JSON.stringify(v)); }catch(e){} }
+const esc = s => String(s).replace(/[&<>"']/g, ch => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[ch]));
 let toastT = 0;
 function toast(msg){ const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 1700); }
 
 /* ---------- settings ---------- */
 const DEF = {pen: {type: 'natural', w: 4, c: '#2E99FB', pr: 3, st: 0}, hl: {w: 90, c: '#FFE24A'}, er: {mode: 'stroke', size: 18},
-  tx: {fs: 24, c: '#141414'}, hold: true, scribble: false, finger: false, custom: [], hlCustom: []};
+  tx: {fs: 24, c: '#141414'}, hold: true, scribble: false, finger: false, custom: [], hlCustom: [], lasso: 'free'};
 const S = (() => {
   const s = ls('settings', {}) || {}, o = {};
   for (const k in DEF){
@@ -300,7 +363,7 @@ const saveS = () => lss('settings', S);
 
 /* ---------- storage (IndexedDB, falls back to memory) ---------- */
 const DB = (() => {
-  let db = null, ok = false, opening = null; const mem = {books: {}, pages: {}, bgs: {}};
+  let db = null, ok = false, opening = null; const mem = {books: {}, pages: {}, bgs: {}, folders: {}};
   // iPadOS closes IndexedDB connections when the page is briefly left (file picker, app switch).
   // So the connection is reopened on demand and a failed transaction is retried once.
   function open(){
@@ -309,8 +372,8 @@ const DB = (() => {
       let done = false;
       const fin = v => { if (!done){ done = true; opening = null; res(v); } };
       try{
-        const rq = indexedDB.open('inknote', 2);
-        rq.onupgradeneeded = () => { const d = rq.result; for (const s of ['books', 'pages', 'bgs']) if (!d.objectStoreNames.contains(s)) d.createObjectStore(s, {keyPath: 'id'}); };
+        const rq = indexedDB.open('inknote', 3);
+        rq.onupgradeneeded = () => { const d = rq.result; for (const s of ['books', 'pages', 'bgs', 'folders']) if (!d.objectStoreNames.contains(s)) d.createObjectStore(s, {keyPath: 'id'}); };
         rq.onsuccess = () => {
           const d = rq.result; db = d; ok = true;
           d.onclose = () => { if (db === d) db = null; };
@@ -369,7 +432,12 @@ function textLines(it){
 function maxR(it){ if (!it.r) return 1; let m = 0; for (const v of it.r) if (v > m) m = v; return m; }
 function bounds(it){
   let b = BND.get(it); if (b) return b;
-  if (it.t === 'text') b = {x: it.x, y: it.y, w: it.w, h: Math.max(1, textLines(it).length) * it.fs * 1.4};
+  if (it.t === 'text'){
+    // the box is as wide as the typed text, not the whole wrap width (a short line used to get a 560-wide box, so circling it missed)
+    const L = textLines(it); MC.font = fontOf(it.fs); let mw = 0;
+    for (const l of L) mw = Math.max(mw, MC.measureText(l).width);
+    b = {x: it.x, y: it.y, w: Math.max(it.fs * 0.6, Math.min(it.w, mw)), h: Math.max(1, L.length) * it.fs * 1.4};
+  }
   else if (it.t === 'img') b = {x: it.x, y: it.y, w: it.w, h: it.h};
   else {
     const p = it.p; let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
@@ -463,7 +531,10 @@ function drawItem(c, it, temp){
   }
   if (it.t === 'img'){
     const im = imgOf(it.src);
-    if (im.ok) c.drawImage(im.el, it.x, it.y, it.w, it.h); else { c.fillStyle = 'rgba(128,128,128,.18)'; c.fillRect(it.x, it.y, it.w, it.h); }
+    if (im.ok){
+      if (it.cr){ const q = it.cr, nw = im.el.naturalWidth, nh = im.el.naturalHeight; c.drawImage(im.el, q[0] * nw, q[1] * nh, q[2] * nw, q[3] * nh, it.x, it.y, it.w, it.h); }
+      else c.drawImage(im.el, it.x, it.y, it.w, it.h);
+    } else { c.fillStyle = 'rgba(128,128,128,.18)'; c.fillRect(it.x, it.y, it.w, it.h); }
     return;
   }
   const g = temp ? buildGeo(it) : geo(it);
@@ -632,7 +703,7 @@ function isScribble(P){
 function scribbleHits(pg, raw){
   const bb = bboxPts(raw), pad = 4;
   return pg.items.filter(it => {
-    if (it.t !== 'ink' && it.t !== 'hl') return false;
+    if ((it.t !== 'ink' && it.t !== 'hl') || it.lk) return false;
     const b = bounds(it);
     if (b.x > bb.x + bb.w || b.x + b.w < bb.x || b.y > bb.y + bb.h || b.y + b.h < bb.y) return false;
     const p = it.p, n = p.length >> 1; let c = 0;
@@ -721,7 +792,7 @@ const dirtyPages = new Set(); let saveT = 0, metaDirty = false;
 function setSaved(ok){ $('#saved').textContent = ok ? (DB.ok ? '已存檔' : '沒有存檔') : '存檔中…'; }
 function touch(pg){ pg.ver = (pg.ver || 0) + 1; dirtyPages.add(pg); metaDirty = true; book.updated = Date.now(); scheduleSave(); requestRender(); }
 function scheduleSave(){ clearTimeout(saveT); saveT = setTimeout(flush, 700); setSaved(false); }
-function bookMeta(){ return {id: book.id, title: book.title, paper: book.paper, color: book.color, pages: pages.map(p => p.id), created: book.created, updated: book.updated}; }
+function bookMeta(){ return {id: book.id, title: book.title, paper: book.paper, color: book.color, folder: book.folder || null, pages: pages.map(p => p.id), created: book.created, updated: book.updated}; }
 function flush(){
   clearTimeout(saveT); if (!book) return Promise.resolve();
   const jobs = [];
@@ -822,6 +893,16 @@ function renderLive(){
     c.fillStyle = 'rgba(46,124,246,.06)'; c.fill(); c.strokeStyle = theme.accent; c.lineWidth = 1.5 / z; c.setLineDash([6 / z, 5 / z]); c.stroke(); c.setLineDash([]);
   } else if (cur && cur.kind === 'erase' && cur.at){
     setPT(c, cur.at.pi); c.beginPath(); c.arc(cur.at.x, cur.at.y, S.er.size / 2, 0, Math.PI * 2); c.strokeStyle = theme.fg2; c.lineWidth = 1.2 / z; c.stroke();
+  }
+  if (tool === 'lasso' && S.lasso === 'locked' && !viewMode){
+    // show where the locked things are, since only they can be circled now
+    c.strokeStyle = theme.fg2; c.lineWidth = 1.2 / z; c.setLineDash([4 / z, 4 / z]);
+    for (let i = 0; i < pages.length; i++){
+      const top = pageTop(i); if (top + phOf(pages[i]) < V.y) continue; if (top > V.y + CH / z) break;
+      setPT(c, i);
+      for (const it of pages[i].items) if (it.lk){ const b = bounds(it), m = 4 / z; c.strokeRect(b.x - m, b.y - m, b.w + 2 * m, b.h + 2 * m); }
+    }
+    c.setLineDash([]);
   }
   if (sel){
     const pi = pages.indexOf(sel.pg); if (pi < 0){ sel = null; return; }
@@ -934,7 +1015,7 @@ function eraseMove(ev){
   cur.last = {pi, x, y};
   const pg = pages[pi], out = []; let changed = false;
   for (const it of pg.items){
-    if (it.t === 'text' || it.t === 'img'){ out.push(it); continue; }
+    if (it.t === 'text' || it.t === 'img' || it.lk){ out.push(it); continue; }
     if (S.er.mode === 'stroke'){ if (hitAny(it, pts, r)) changed = true; else out.push(it); }
     else { const parts = splitItem(it, pts, r); if (parts.length !== 1 || parts[0] !== it) changed = true; for (const q of parts) out.push(q); }
   }
@@ -956,12 +1037,24 @@ function pip(x, y, poly){
   return ins;
 }
 function inLasso(it, poly){
-  if (it.t === 'text' || it.t === 'img'){ const b = bounds(it); return pip(b.x + b.w / 2, b.y + b.h / 2, poly); }
+  if (it.t === 'text' || it.t === 'img'){
+    // the middle is inside, or at least 40% of a 5x5 grid over the box is
+    const b = bounds(it); if (pip(b.x + b.w / 2, b.y + b.h / 2, poly)) return true;
+    let c = 0; for (let i = 0; i <= 4; i++) for (let j = 0; j <= 4; j++) if (pip(b.x + b.w * i / 4, b.y + b.h * j / 4, poly)) c++;
+    return c >= 10;
+  }
   const p = it.p, n = p.length >> 1; let c = 0;
   for (let i = 0; i < n; i++) if (pip(p[2*i], p[2*i+1], poly)) c++;
   return c >= Math.max(1, n * 0.5);
 }
-function setSel(pg, items){ sel = {pg, items, box: unionBounds(items), moving: false}; syncPaste(); requestRender(); }
+function setSel(pg, items){ sel = {pg, items, box: unionBounds(items), moving: false}; syncSelMenu(); syncPaste(); requestRender(); }
+function syncSelMenu(){
+  if (!sel) return;
+  const m = $('#selmenu'), its = sel.items, anyLk = its.some(it => it.lk), act = k => m.querySelector(`[data-act="${k}"]`);
+  act('crop').hidden = !(its.length === 1 && its[0].t === 'img');
+  act('color').hidden = !its.some(it => it.t === 'ink' || it.t === 'text');
+  act('lock').hidden = anyLk; act('unlock').hidden = !anyLk;
+}
 function clearSel(){ if (!sel) return; sel = null; $('#selmenu').hidden = true; syncPaste(); requestRender(); }
 function startLasso(e, d, pi, byPen){
   if (sel){
@@ -977,8 +1070,12 @@ function lassoMove(ev){ const d = toDoc(ev), q = [d.x, d.y - pageTop(cur.pi)], l
 function endLasso(){
   const k = cur; cur = null; const pg = pages[k.pi];
   if (k.pts.length < 3){ requestLive(); return; }
-  const picked = pg.items.filter(it => inLasso(it, k.pts));
-  if (picked.length) setSel(pg, picked); else requestLive();
+  const wantLocked = S.lasso === 'locked', picked = pg.items.filter(it => !!it.lk === wantLocked && inLasso(it, k.pts));
+  if (picked.length) setSel(pg, picked);
+  else {
+    if (!wantLocked && pg.items.some(it => it.lk && inLasso(it, k.pts))) toast('圈到的是鎖住的東西。要改它：再點一次套索，選「只圈鎖住的」');
+    requestLive();
+  }
 }
 function xform(it, dx, dy, s, ox, oy){
   const o = Object.assign({}, it);
@@ -1024,6 +1121,15 @@ $('#selmenu').addEventListener('click', e => {
   if (act === 'copy' || act === 'cut'){ CLIP = sel.items.map(it => Object.assign({}, it)); toast(act === 'cut' ? '已剪下' : '已拷貝，用套索工具下方的「貼上」放回來'); }
   if (act === 'del' || act === 'cut'){ commit([{pg, before: pg.items, after: pg.items.filter(it => !set.has(it))}]); clearSel(); return; }
   if (act === 'dup'){ const cp = sel.items.map(it => xform(it, 24, 24, 1, 0, 0)); commit([{pg, before: pg.items, after: pg.items.concat(cp)}]); setSel(pg, cp); return; }
+  if (act === 'lock' || act === 'unlock'){
+    const lock = act === 'lock', map = new Map();
+    const after = pg.items.map(it => { if (!set.has(it)) return it; const o = Object.assign({}, it); if (lock) o.lk = 1; else delete o.lk; map.set(it, o); return o; });
+    commit([{pg, before: pg.items, after}]);
+    if (lock){ clearSel(); toast(`已鎖定 ${set.size} 樣：一般套索圈不到，橡皮擦也擦不掉`); }
+    else { S.lasso = 'free'; saveS(); syncToolbar(); setSel(pg, sel.items.map(it => map.get(it) || it)); toast(`已解鎖 ${set.size} 樣，套索切回一般`); }
+    return;
+  }
+  if (act === 'crop'){ const it = sel.items[0]; if (sel.items.length === 1 && it.t === 'img') openCropper(pg, it); return; }
   if (act === 'color'){
     const map = new Map();
     const after = pg.items.map(it => { if (set.has(it) && (it.t === 'ink' || it.t === 'text')){ const o = Object.assign({}, it, {c: S.pen.c}); map.set(it, o); return o; } return it; });
@@ -1066,7 +1172,7 @@ function commitTA(){
 function textTap(pi, lx, ly){
   const pg = pages[pi];
   for (let i = pg.items.length - 1; i >= 0; i--){
-    const it = pg.items[i]; if (it.t !== 'text') continue;
+    const it = pg.items[i]; if (it.t !== 'text' || it.lk) continue;
     const b = bounds(it); if (lx >= b.x - 6 && lx <= b.x + b.w + 6 && ly >= b.y - 6 && ly <= b.y + b.h + 6){ openTA(pg, it, false); return; }
   }
   const fs = S.tx.fs;
@@ -1094,7 +1200,64 @@ function placeImage(src, w, h){
   const vy = V.y + CH / V.z / 2 - pageTop(pi), cy = clamp(vy, H / 2 + 20, PHp - H / 2 - 20);
   const it = {t: 'img', x: r1(PW / 2 - W / 2), y: r1(cy - H / 2), w: r1(W), h: r1(H), src};
   commit([{pg, before: pg.items, after: pg.items.concat([it])}]);
-  setTool('lasso'); setSel(pg, [it]);
+  if (S.lasso === 'locked'){ S.lasso = 'free'; saveS(); }
+  setTool('lasso'); setSel(pg, [it]); toast('要裁剪，按圖片上方選單的「裁剪」');
+}
+
+/* ---------- image crop: the item keeps the whole picture plus a crop box, so it can be re-cropped wider later ---------- */
+function openCropper(pg, it){
+  const im = imgOf(it.src);
+  if (!im.ok){
+    // a just-inserted picture may still be decoding: open as soon as it is ready
+    if (!im.pend){ im.pend = true; const go = () => { im.pend = false; if (im.ok) openCropper(pg, it); else toast('這張圖片讀不到'); }; im.el.addEventListener('load', go, {once: true}); im.el.addEventListener('error', go, {once: true}); }
+    return;
+  }
+  const nw = im.el.naturalWidth, nh = im.el.naturalHeight, q0 = it.cr || [0, 0, 1, 1], MIN = 0.04;
+  let q = q0.slice(), drag = null;
+  const maxW = Math.max(200, Math.min(840, innerWidth - 100)), maxH = Math.max(180, innerHeight * 0.88 - 230);
+  const s = Math.min(maxW / nw, maxH / nh), W = Math.round(nw * s), H = Math.round(nh * s);
+  const HP = {nw: [0, 0], n: [.5, 0], ne: [1, 0], e: [1, .5], se: [1, 1], s: [.5, 1], sw: [0, 1], w: [0, .5]};
+  const sh = openSheet(`<h2>裁剪圖片<button type="button" class="ib sm" data-x aria-label="關閉">${svg('x')}</button></h2>
+    <div class="crop-stage"><div class="crop-wrap" style="width:${W}px;height:${H}px"><div class="crop-clip"><img alt="" draggable="false"><div class="crop-shade"></div></div>
+      <div class="crop-box">${Object.keys(HP).map(h => `<span class="crop-h" data-h="${h}" style="left:${HP[h][0] * 100}%;top:${HP[h][1] * 100}%"></span>`).join('')}</div></div></div>
+    <p class="hint" style="margin:0 0 12px;text-align:center">拖白色方塊調整範圍，拖框內移動。之後還能再按「裁剪」放大回來。</p>
+    <div class="acts"><button type="button" class="btn" data-reset>還原整張</button><span class="grow"></span><button type="button" class="btn" data-cancel>取消</button><button type="button" class="btn primary" data-ok>完成</button></div>`, true);
+  sh.querySelector('img').src = it.src;
+  const wrap = sh.querySelector('.crop-wrap'), box = sh.querySelector('.crop-box'), shade = sh.querySelector('.crop-shade');
+  const paint = () => { for (const el of [box, shade]){ el.style.left = q[0] * W + 'px'; el.style.top = q[1] * H + 'px'; el.style.width = q[2] * W + 'px'; el.style.height = q[3] * H + 'px'; } };
+  paint();
+  wrap.addEventListener('pointerdown', e => {
+    const h = e.target.closest('[data-h]'); if (!h && !e.target.closest('.crop-box')) return;
+    e.preventDefault(); try{ wrap.setPointerCapture(e.pointerId); }catch(_){}
+    drag = {id: e.pointerId, h: h ? h.dataset.h : 'move', x: e.clientX, y: e.clientY, q: q.slice()};
+  });
+  wrap.addEventListener('pointermove', e => {
+    if (!drag || e.pointerId !== drag.id) return;
+    const dx = (e.clientX - drag.x) / W, dy = (e.clientY - drag.y) / H, o = drag.q;
+    if (drag.h === 'move') q = [clamp(o[0] + dx, 0, 1 - o[2]), clamp(o[1] + dy, 0, 1 - o[3]), o[2], o[3]];
+    else {
+      let x0 = o[0], y0 = o[1], x1 = o[0] + o[2], y1 = o[1] + o[3];
+      if (drag.h.includes('w')) x0 = clamp(x0 + dx, 0, x1 - MIN);
+      if (drag.h.includes('e')) x1 = clamp(x1 + dx, x0 + MIN, 1);
+      if (drag.h.includes('n')) y0 = clamp(y0 + dy, 0, y1 - MIN);
+      if (drag.h.includes('s')) y1 = clamp(y1 + dy, y0 + MIN, 1);
+      q = [x0, y0, x1 - x0, y1 - y0];
+    }
+    paint();
+  });
+  const end = e => { if (drag && e.pointerId === drag.id) drag = null; };
+  wrap.addEventListener('pointerup', end); wrap.addEventListener('pointercancel', end);
+  sh.querySelector('[data-x]').onclick = closeSheet; sh.querySelector('[data-cancel]').onclick = closeSheet;
+  sh.querySelector('[data-reset]').onclick = () => { q = [0, 0, 1, 1]; paint(); };
+  sh.querySelector('[data-ok]').onclick = () => {
+    closeSheet();
+    if (q.every((v, i) => Math.abs(v - q0[i]) < 1e-4)) return;
+    if (!pages.includes(pg) || !pg.items.includes(it)){ toast('這張圖片已經不在這一頁了'); return; }
+    const kx = it.w / q0[2], ky = it.h / q0[3];
+    const o = Object.assign({}, it, {x: r1(it.x + (q[0] - q0[0]) * kx), y: r1(it.y + (q[1] - q0[1]) * ky), w: r1(q[2] * kx), h: r1(q[3] * ky)});
+    if (q[0] < 1e-4 && q[1] < 1e-4 && q[2] > 1 - 1e-4 && q[3] > 1 - 1e-4) delete o.cr; else o.cr = q.map(v => Math.round(v * 1e4) / 1e4);
+    commit([{pg, before: pg.items, after: pg.items.map(x => x === it ? o : x)}]); setSel(pg, [o]); toast('已裁剪');
+  };
 }
 
 /* ---------- pointer input ---------- */
@@ -1260,6 +1423,7 @@ function syncToolbar(){
     const dot = b.querySelector('.cdot');
     if (dot) dot.style.setProperty('--c', b.dataset.tool === 'pen' ? S.pen.c : b.dataset.tool === 'hl' ? S.hl.c : S.tx.c);
   });
+  const lk = $('[data-tool="lasso"] .lkb'); if (lk) lk.hidden = S.lasso !== 'locked';
   $('#b-finger').setAttribute('aria-pressed', String(S.finger));
   $('#b-view').setAttribute('aria-pressed', String(viewMode));
   syncUndo(); syncPaste();
@@ -1270,8 +1434,8 @@ function initToolbar(){
   $('#b-finger').innerHTML = svg('finger'); $('#b-img').innerHTML = svg('img');
   $('#b-view').innerHTML = svg('eye'); $('#b-more').innerHTML = svg('more'); $('#b-share').innerHTML = svg('share');
   $('#b-share').addEventListener('click', () => { commitTA(); clearSel(); closePanel(); openShareSheet(); });
-  $$('[data-tool]').forEach(b => { b.innerHTML = svg(b.dataset.tool) + (/pen|hl|text/.test(b.dataset.tool) ? '<span class="cdot"></span>' : ''); });
-  $('#new-book').innerHTML = svg('plus') + '新筆記本';
+  $$('[data-tool]').forEach(b => { b.innerHTML = svg(b.dataset.tool) + (/pen|hl|text/.test(b.dataset.tool) ? '<span class="cdot"></span>' : '') + (b.dataset.tool === 'lasso' ? `<span class="lkb" hidden>${svg('lock')}</span>` : ''); });
+  $('#new-book').innerHTML = svg('plus') + '新增';
   $$('[data-tool]').forEach(b => b.addEventListener('click', () => {
     const t = b.dataset.tool;
     if (viewMode){ viewMode = false; }
@@ -1303,8 +1467,55 @@ function widthBlock(k){
   <div class="slide"><button type="button" class="ib sm" data-wstep="-1" aria-label="細一點">${svg('minus')}</button><input type="range" min="0" max="1000" step="1" value="${w2pos(w, k)}" data-wslider aria-label="粗細"><button type="button" class="ib sm" data-wstep="1" aria-label="粗一點">${svg('plus')}</button></div>`;
 }
 function colorsBlock(list, custom, curC){
-  return `<div class="row"><span class="lbl">顏色</span><button type="button" class="ib sm" data-addcolor aria-label="新增顏色">${svg('plus')}</button></div>
-  <div class="colors">${list.map(c => `<button type="button" data-color="${c}" style="--c:${c}" aria-pressed="${c.toLowerCase() === curC.toLowerCase()}" aria-label="顏色 ${c}"></button>`).join('')}${custom.map(c => `<button type="button" data-color="${c}" data-custom style="--c:${c}" aria-pressed="${c.toLowerCase() === curC.toLowerCase()}" aria-label="自訂顏色 ${c}，按住移除"></button>`).join('')}</div>`;
+  return `<div class="row"><span class="lbl">顏色</span><button type="button" class="ib sm" data-addcolor aria-label="自訂顏色" aria-expanded="${!!pick}">${svg('plus')}</button></div>
+  <div class="colors">${list.map(c => `<button type="button" data-color="${c}" style="--c:${c}" aria-pressed="${c.toLowerCase() === curC.toLowerCase()}" aria-label="顏色 ${c}"></button>`).join('')}${custom.map(c => `<button type="button" data-color="${c}" data-custom style="--c:${c}" aria-pressed="${c.toLowerCase() === curC.toLowerCase()}" aria-label="自訂顏色 ${c}，按住移除"></button>`).join('')}</div>`
+  + (pick ? pickerHTML() : (custom.length ? '<p class="hint" style="margin:6px 0 0">按住自訂的顏色可以移除。</p>' : ''));
+}
+
+/* ---------- custom colour picker (iPad Safari's own colour input does not open from a hidden field) ---------- */
+let pick = null, pkDrag = null;      // pick = {h, s, v} while the picker is open
+const hex2rgb = h => { const m = /^#?([0-9a-f]{6})$/i.exec(String(h).trim()); if (!m) return null; const n = parseInt(m[1], 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; };
+const rgb2hex = (r, g, b) => '#' + [r, g, b].map(v => Math.round(clamp(v, 0, 255)).toString(16).padStart(2, '0')).join('').toUpperCase();
+function rgb2hsv(r, g, b){
+  r /= 255; g /= 255; b /= 255; const mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn; let h = 0;
+  if (d){ if (mx === r) h = ((g - b) / d) % 6; else if (mx === g) h = (b - r) / d + 2; else h = (r - g) / d + 4; h *= 60; if (h < 0) h += 360; }
+  return {h, s: mx ? d / mx : 0, v: mx};
+}
+function hsv2hex(h, s, v){ const f = n => { const k = (n + h / 60) % 6; return v - v * s * Math.max(0, Math.min(k, 4 - k, 1)); }; return rgb2hex(f(5) * 255, f(3) * 255, f(1) * 255); }
+const pickHex = () => hsv2hex(pick.h, pick.s, pick.v);
+function pickerHTML(){
+  const hx = pickHex();
+  return `<div class="picker"><canvas class="sv" data-pk="sv" aria-label="深淺"></canvas><canvas class="hue" data-pk="hue" aria-label="色相"></canvas>
+    <div class="prow"><span class="psw" style="--c:${hx}"></span><input type="text" data-hex value="${hx}" maxlength="7" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="色碼"></div>
+    <div class="acts"><button type="button" class="btn" data-pkcancel>取消</button><button type="button" class="btn primary" data-pkok>加入這個顏色</button></div></div>`;
+}
+function drawPicker(){
+  if (!pick) return;
+  const sv = panel.querySelector('[data-pk="sv"]'), hu = panel.querySelector('[data-pk="hue"]'); if (!sv || !hu) return;
+  const dp = Math.min(window.devicePixelRatio || 1, 2);
+  for (const cv of [sv, hu]){ cv.width = Math.round(cv.clientWidth * dp); cv.height = Math.round(cv.clientHeight * dp); }
+  let c = sv.getContext('2d'), W = sv.width, H = sv.height, g;
+  c.fillStyle = hsv2hex(pick.h, 1, 1); c.fillRect(0, 0, W, H);
+  g = c.createLinearGradient(0, 0, W, 0); g.addColorStop(0, '#fff'); g.addColorStop(1, 'rgba(255,255,255,0)'); c.fillStyle = g; c.fillRect(0, 0, W, H);
+  g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, '#000'); c.fillStyle = g; c.fillRect(0, 0, W, H);
+  const x = pick.s * W, y = (1 - pick.v) * H;
+  c.lineWidth = 2.5 * dp; c.strokeStyle = '#fff'; c.beginPath(); c.arc(x, y, 8 * dp, 0, Math.PI * 2); c.stroke();
+  c.lineWidth = dp; c.strokeStyle = 'rgba(0,0,0,.45)'; c.beginPath(); c.arc(x, y, 9.6 * dp, 0, Math.PI * 2); c.stroke();
+  c = hu.getContext('2d'); W = hu.width; H = hu.height;
+  g = c.createLinearGradient(0, 0, W, 0); for (let i = 0; i <= 6; i++) g.addColorStop(i / 6, hsv2hex(i * 60, 1, 1));
+  c.fillStyle = g; c.fillRect(0, 0, W, H);
+  const hx = pick.h / 360 * W; c.lineWidth = 3 * dp; c.strokeStyle = '#fff'; c.strokeRect(hx - 4 * dp, 1.5 * dp, 8 * dp, H - 3 * dp);
+}
+function syncPicker(fromHex){
+  const hx = pickHex(), sw = panel.querySelector('.picker .psw'), inp = panel.querySelector('[data-hex]');
+  if (sw) sw.style.setProperty('--c', hx);
+  if (inp && !fromHex) inp.value = hx;
+  drawPicker(); drawPreview();
+}
+function pickAt(e){
+  const r = pkDrag.cv.getBoundingClientRect(), fx = clamp((e.clientX - r.left) / r.width, 0, 1), fy = clamp((e.clientY - r.top) / r.height, 0, 1);
+  if (pkDrag.k === 'sv'){ pick.s = fx; pick.v = 1 - fy; } else pick.h = Math.min(359.9, fx * 360);
+  syncPicker();
 }
 function panelHTML(t){
   const head = title => `<div class="ph"><span>${title}</span><button type="button" class="ib sm" data-close aria-label="關閉">${svg('x')}</button></div>`;
@@ -1323,18 +1534,22 @@ function panelHTML(t){
     <div class="row"><span class="lbl">大小</span><span class="num" data-ernum>${S.er.size}</span></div><div class="slide"><input type="range" min="4" max="90" step="1" value="${S.er.size}" data-ersize aria-label="橡皮擦大小"></div>
     <p class="hint">橡皮擦不會擦到文字和圖片，要刪它們請用套索圈起來。</p>`;
   if (t === 'text') return head('文字') + stepRow('fs', '字級', S.tx.fs, '點紙面就能打字，點已經有的文字可以修改。清空文字就是刪除') + colorsBlock(PEN_COLORS, S.custom, S.tx.c);
-  return head('套索') + `<p class="hint" style="margin:4px 0 8px">圈起筆跡、文字或圖片 → 拖框內移動、拖右下角圓點縮放，上方選單可以刪除、剪下、拷貝、再製、換顏色。</p>`
+  const lkd = S.lasso === 'locked';
+  return head('套索') + `<div class="seg"><button type="button" data-lmode="free" aria-pressed="${!lkd}">一般套索</button><button type="button" data-lmode="locked" aria-pressed="${lkd}">只圈鎖住的</button></div>
+    <p class="hint" style="margin:8px 0 8px">${lkd
+      ? '現在只圈得到鎖住的東西，頁面上用虛線框標出來。圈起來按「解鎖」就能再改，套索會自動切回一般。'
+      : '圈起筆跡、文字或圖片 → 拖框內移動、拖右下角圓點縮放，上方選單可以刪除、剪下、拷貝、再製、換顏色、裁剪圖片。按「鎖定」之後，一般套索就圈不到它，橡皮擦也擦不掉，點文字也不會進入編輯。'}</p>`
     + (CLIP.length ? `<button type="button" class="btn" data-paste style="width:100%">貼上拷貝的 ${CLIP.length} 樣東西</button>` : '');
 }
 function openPanel(t){
-  panelFor = t; panel.innerHTML = panelHTML(t); panel.hidden = false;
+  pick = null; panelFor = t; panel.innerHTML = panelHTML(t); panel.hidden = false;
   const btn = $(`[data-tool="${t}"]`), r = btn.getBoundingClientRect(), pw = panel.offsetWidth;
   panel.style.left = clamp(r.left + r.width / 2 - pw / 2, 10, innerWidth - pw - 10) + 'px';
   panel.style.top = (r.bottom + 8) + 'px'; panel.style.maxHeight = (innerHeight - r.bottom - 18) + 'px';
   drawPreview();
 }
-function closePanel(){ if (panel.hidden) return; panel.hidden = true; panelFor = null; }
-function refreshPanel(){ if (!panel.hidden && panelFor){ const st = panel.scrollTop; panel.innerHTML = panelHTML(panelFor); panel.scrollTop = st; drawPreview(); } syncToolbar(); }
+function closePanel(){ if (panel.hidden) return; panel.hidden = true; panelFor = null; pick = null; pkDrag = null; }
+function refreshPanel(){ if (!panel.hidden && panelFor){ const st = panel.scrollTop; panel.innerHTML = panelHTML(panelFor); panel.scrollTop = st; drawPreview(); drawPicker(); } syncToolbar(); }
 function drawPreview(){
   const cv = panel.querySelector('.pv'); if (!cv) return;
   const w = cv.clientWidth, h = cv.clientHeight, dp = Math.min(window.devicePixelRatio || 1, 3);
@@ -1343,13 +1558,13 @@ function drawPreview(){
   c.setTransform(dp, 0, 0, dp, 0, 0); c.fillStyle = pc.bg; c.fillRect(0, 0, w, h);
   const p = [], N = 60;
   for (let i = 0; i <= N; i++){ const t = i / N; p.push(r1((w * 0.16 + t * w * 0.68) / z), r1((h * 0.5 - Math.sin(t * Math.PI * 1.7) * h * 0.27) / z)); }
-  let it;
-  if (panelFor === 'hl') it = {t: 'hl', c: S.hl.c, w: S.hl.w * WK, p, r: null};
+  let it; const pc2 = pick ? pickHex() : null;
+  if (panelFor === 'hl') it = {t: 'hl', c: pc2 || S.hl.c, w: S.hl.w * WK, p, r: null};
   else {
     let r = null; const ty = S.pen.type;
     if (ty === 'callig'){ r = []; for (let i = 0; i <= N; i++){ const j = Math.min(i, N - 1), a = Math.atan2(p[2*j+3] - p[2*j+1], p[2*j+2] - p[2*j]); r.push(0.22 + Math.abs(Math.sin(a - Math.PI / 4))); } }
     else if (ty === 'natural' && S.pen.pr > 0){ r = []; for (let i = 0; i <= N; i++){ const sp = Math.abs(Math.cos(i / N * Math.PI * 1.7)); r.push(1 + ((1.18 - 0.55 * sp) - 1) * S.pen.pr / 5); } }
-    it = {t: 'ink', pen: ty, c: S.pen.c, w: S.pen.w * WK, p, r};
+    it = {t: 'ink', pen: ty, c: (panelFor === 'pen' && pc2) || S.pen.c, w: S.pen.w * WK, p, r};
   }
   c.setTransform(dp * z, 0, 0, dp * z, 0, 0); drawItem(c, it, true);
 }
@@ -1369,7 +1584,18 @@ panel.addEventListener('click', e => {
     else S.pen[k] = clamp(S.pen[k] + d, 0, k === 'pr' ? 5 : 10);
   }
   else if (b.dataset.color){ colorTarget().c = b.dataset.color; }
-  else if (b.hasAttribute('data-addcolor')){ const ci = $('#colorIn'); ci.value = colorTarget().c; ci.click(); return; }
+  else if (b.hasAttribute('data-addcolor')){
+    if (pick) pick = null;
+    else { const rgb = hex2rgb(colorTarget().c) || [46, 153, 251]; pick = rgb2hsv(rgb[0], rgb[1], rgb[2]); }
+    refreshPanel(); const pk = panel.querySelector('.picker'); if (pk) pk.scrollIntoView({block: 'nearest'}); return;
+  }
+  else if (b.hasAttribute('data-pkcancel')){ pick = null; }
+  else if (b.hasAttribute('data-pkok')){
+    const c = pickHex(), list = panelFor === 'hl' ? S.hlCustom : S.custom;
+    if (!list.includes(c)){ list.push(c); if (list.length > 14) list.shift(); }
+    colorTarget().c = c; pick = null; toast('已加入自訂顏色');
+  }
+  else if (b.dataset.lmode){ S.lasso = b.dataset.lmode; clearSel(); requestRender(); }
   else if (b.dataset.ermode){ S.er.mode = b.dataset.ermode; }
   else if (b.hasAttribute('data-paste')){ closePanel(); $('#paste').click(); return; }
   else return;
@@ -1379,8 +1605,11 @@ panel.addEventListener('input', e => {
   const el = e.target;
   if (el.hasAttribute('data-wslider')){ const k = panelFor === 'hl' ? 'hl' : 'pen'; S[k].w = pos2w(+el.value, k); panel.querySelector('[data-wnum]').textContent = wtxt(S[k].w); drawPreview(); saveS(); }
   if (el.hasAttribute('data-ersize')){ S.er.size = +el.value; panel.querySelector('[data-ernum]').textContent = S.er.size; saveS(); }
+  if (el.hasAttribute('data-hex') && pick){ const v = el.value.trim(), rgb = hex2rgb(v[0] === '#' ? v : '#' + v); if (rgb){ pick = rgb2hsv(rgb[0], rgb[1], rgb[2]); syncPicker(true); } }
 });
 panel.addEventListener('pointerdown', e => {
+  const cv = e.target.closest('[data-pk]');
+  if (cv && pick){ e.preventDefault(); pkDrag = {cv, k: cv.dataset.pk, id: e.pointerId}; try{ cv.setPointerCapture(e.pointerId); }catch(_){} pickAt(e); return; }
   const b = e.target.closest('[data-custom]'); if (!b) return;
   clearTimeout(holdTimer);
   holdTimer = setTimeout(() => {
@@ -1388,12 +1617,11 @@ panel.addEventListener('pointerdown', e => {
     if (i >= 0){ list.splice(i, 1); saveS(); refreshPanel(); toast('已移除這個顏色'); }
   }, 650);
 });
-['pointerup', 'pointercancel', 'pointerleave'].forEach(t => panel.addEventListener(t, () => clearTimeout(holdTimer)));
-$('#colorIn').addEventListener('change', () => {
-  const c = $('#colorIn').value.toUpperCase(), list = panelFor === 'hl' ? S.hlCustom : S.custom;
-  if (!list.includes(c)){ list.push(c); if (list.length > 10) list.shift(); }
-  colorTarget().c = c; saveS(); refreshPanel();
-});
+panel.addEventListener('pointermove', e => { if (pkDrag && pick && e.pointerId === pkDrag.id) pickAt(e); });
+['pointerup', 'pointercancel', 'pointerleave'].forEach(t => panel.addEventListener(t, e => { clearTimeout(holdTimer); if (t !== 'pointerleave' && pkDrag && e.pointerId === pkDrag.id) pkDrag = null; }));
+// the panel is placed under its button once; when the iPad rotates, close it rather than leave it misplaced
+let panelW = innerWidth;
+addEventListener('resize', () => { if (innerWidth !== panelW){ panelW = innerWidth; closePanel(); } });
 document.addEventListener('pointerdown', e => {
   if (panel.hidden) return;
   if (panel.contains(e.target) || e.target.closest('[data-tool]')) return;
@@ -1433,8 +1661,53 @@ function wirePaper(root, state, onChange){
   });
   drawPaperPreviews(root, state.color);
 }
+/* ---------- folders ---------- */
+let FOLDERS = [], curFolder = ls('folder', null);
+const folderById = id => (id && FOLDERS.find(f => f.id === id)) || null;
+function folderPath(id){ const out = []; let f = folderById(id), guard = 0; while (f && guard++ < 50){ out.unshift(f); f = folderById(f.parent); } return out; }
+const folderLabel = id => folderPath(id).map(f => f.title).join(' / ');
+function setFolder(id){ curFolder = id || null; lss('folder', curFolder); renderLibrary(); }
+function folderOptions(cur){
+  const opts = FOLDERS.map(f => [f.id, folderLabel(f.id)]).sort((a, b) => a[1].localeCompare(b[1], 'zh-Hant', {numeric: true}));
+  return [['', '書架最上層']].concat(opts).map(([id, n]) => `<option value="${id}"${(cur || '') === id ? ' selected' : ''}>${esc(n)}</option>`).join('');
+}
+function openAddSheet(){
+  const sh = openSheet(`<h2>新增<button type="button" class="ib sm" data-x aria-label="關閉">${svg('x')}</button></h2>
+    <div class="opts"><button type="button" class="btn" id="add-book">${svg('book')}新筆記本</button><button type="button" class="btn" id="add-folder">${svg('folder')}新資料夾</button></div>
+    ${curFolder ? `<p class="hint" style="margin:12px 0 0">會放在「${esc(folderLabel(curFolder))}」裡面。</p>` : ''}`);
+  sh.querySelector('[data-x]').onclick = closeSheet;
+  $('#add-book').onclick = newBookSheet;
+  $('#add-folder').onclick = () => folderSheet(null);
+}
+function folderSheet(f){
+  const isNew = !f;
+  const sh = openSheet(`<h2>${isNew ? '新資料夾' : '資料夾設定'}<button type="button" class="ib sm" data-x aria-label="關閉">${svg('x')}</button></h2>
+    <label class="field"><span>名稱</span><input type="text" id="fd-name" maxlength="60"></label>
+    <div class="acts"><button type="button" class="btn primary" id="fd-ok">${isNew ? '建立' : '完成'}</button>${isNew ? '' : `<button type="button" class="btn danger" id="fd-del">${svg('trash')}刪除資料夾</button>`}</div>
+    ${isNew ? '' : '<p class="hint" style="margin:12px 0 0">刪除資料夾不會刪掉筆記，裡面的筆記本和資料夾會移到上一層。</p>'}`);
+  const name = $('#fd-name'); name.value = isNew ? `資料夾 ${FOLDERS.length + 1}` : f.title;
+  sh.querySelector('[data-x]').onclick = closeSheet;
+  $('#fd-ok').onclick = async () => {
+    const t = name.value.trim() || (isNew ? `資料夾 ${FOLDERS.length + 1}` : f.title), now = Date.now();
+    try{
+      if (isNew) await DB.put('folders', {id: uid(), title: t, parent: curFolder || null, created: now, updated: now});
+      else { f.title = t; f.updated = now; await DB.put('folders', f); }
+    } catch(e){ toast('存檔失敗：' + ((e && e.message) || e)); return; }
+    closeSheet(); renderLibrary();
+  };
+  if (!isNew) armDanger($('#fd-del'), '再按一次刪除資料夾', async () => {
+    const up = f.parent || null;
+    try{
+      for (const b of await DB.all('books')) if (b.folder === f.id){ b.folder = up; await DB.put('books', b); }
+      for (const o of FOLDERS) if (o.parent === f.id){ o.parent = up; await DB.put('folders', o); }
+      await DB.del('folders', f.id);
+    } catch(e){ toast('刪除失敗：' + ((e && e.message) || e)); return; }
+    if (curFolder === f.id){ curFolder = up; lss('folder', curFolder); }
+    closeSheet(); renderLibrary(); toast('已刪除資料夾，裡面的東西移到上一層');
+  });
+}
 function newBookSheet(){
-  const n = $$('.card').length + 1, st = {paper: 'grid', color: 'cream'};
+  const n = $$('.card[data-book]').length + 1, st = {paper: 'grid', color: 'cream'};
   const sh = openSheet(`<h2>新筆記本<button type="button" class="ib sm" data-x aria-label="關閉">${svg('x')}</button></h2>
     <label class="field"><span>名稱</span><input type="text" id="nb-name" value="筆記本 ${n}" maxlength="60"></label>
     ${paperPicker(st.paper, st.color)}<div class="acts"><button type="button" class="btn primary" id="nb-ok">建立</button></div>`);
@@ -1442,7 +1715,7 @@ function newBookSheet(){
   sh.querySelector('[data-x]').onclick = closeSheet;
   $('#nb-ok').onclick = async () => {
     const now = Date.now(), pg = {id: uid(), items: []};
-    const bk = {id: uid(), title: ($('#nb-name').value.trim() || `筆記本 ${n}`), paper: st.paper, color: st.color, pages: [pg.id], created: now, updated: now};
+    const bk = {id: uid(), title: ($('#nb-name').value.trim() || `筆記本 ${n}`), paper: st.paper, color: st.color, folder: curFolder || null, pages: [pg.id], created: now, updated: now};
     try{ await DB.put('pages', pg); await DB.put('books', bk); }
     catch(e){ toast('建立失敗：' + ((e && e.message) || e)); return; }
     closeSheet(); openBook(bk.id);
@@ -1452,15 +1725,19 @@ function openBookSheet(bk, inEditor){
   const st = {paper: bk.paper, color: bk.color};
   const sh = openSheet(`<h2>筆記本設定<button type="button" class="ib sm" data-x aria-label="關閉">${svg('x')}</button></h2>
     <label class="field"><span>名稱</span><input type="text" id="bk-name" value="" maxlength="60"></label>
+    ${FOLDERS.length ? `<label class="field"><span>放在哪個資料夾</span><select id="bk-folder">${folderOptions(folderById(bk.folder) ? bk.folder : null)}</select></label>` : ''}
     ${paperPicker(st.paper, st.color)}
     <div class="acts">${inEditor ? `<button type="button" class="btn" id="bk-addp">${svg('plus')}在這頁後面加一頁</button><button type="button" class="btn danger" id="bk-delp">${svg('trash')}刪除這一頁</button>` : `<button type="button" class="btn danger" id="bk-del">${svg('trash')}刪除筆記本</button>`}</div>`);
   const name = $('#bk-name'); name.value = bk.title;
   const save = async () => {
     bk.title = name.value.trim() || bk.title; bk.paper = st.paper; bk.color = st.color; bk.updated = Date.now();
+    const fs = $('#bk-folder'); if (fs) bk.folder = fs.value || null;
+    renameTab(bk.id, bk.title);
     if (inEditor){ markMeta(); cacheClear(); requestRender(); } else { await DB.put('books', bk); renderLibrary(); }
   };
   wirePaper(sh, st, save);
   name.addEventListener('change', save);
+  if ($('#bk-folder')) $('#bk-folder').addEventListener('change', () => { save(); const v = $('#bk-folder').value; toast('已移到「' + (v ? folderLabel(v) : '書架最上層') + '」'); });
   sh.querySelector('[data-x]').onclick = () => { save(); closeSheet(); };
   if (inEditor){
     $('#bk-addp').onclick = () => { closeSheet(); addPage(curPage() + 1, true); };
@@ -1468,7 +1745,7 @@ function openBookSheet(bk, inEditor){
   } else {
     armDanger($('#bk-del'), '再按一次刪除（不能復原）', async () => {
       for (const pid of bk.pages){ const p = await DB.get('pages', pid); if (p && p.bg) await DB.del('bgs', p.bg); await DB.del('pages', pid); }
-      await DB.del('books', bk.id); closeSheet(); renderLibrary(); toast('已刪除「' + bk.title + '」');
+      await DB.del('books', bk.id); dropTab(bk.id); closeSheet(); renderLibrary(); toast('已刪除「' + bk.title + '」');
     });
   }
 }
@@ -1558,14 +1835,14 @@ function progress(msg){
   bg.querySelector('button').onclick = () => { st.cancelled = true; st.set('取消中…'); };
   st.set(msg, 0); return st;
 }
-async function pdfToPages(file){
-  const pr = progress('讀取 PDF…'), out = [];
+async function pdfToPages(file, label){
+  const pr = progress((label || '') + '讀取 PDF…'), out = []; label = label || '';
   try{
     const L = await getPdfjs();
     const doc = await L.getDocument({data: new Uint8Array(await file.arrayBuffer()), cMapUrl: CDN.cmaps, cMapPacked: true, standardFontDataUrl: CDN.fonts, isEvalSupported: false}).promise;
     const n = doc.numPages;
     for (let i = 1; i <= n && !pr.cancelled; i++){
-      pr.set(`匯入第 ${i} / ${n} 頁`, (i - 1) / n);
+      pr.set(`${label}匯入第 ${i} / ${n} 頁`, (i - 1) / n);
       const page = await doc.getPage(i), vp1 = page.getViewport({scale: 1}), vp = page.getViewport({scale: Math.min(4, 1500 / vp1.width)});
       const cv = document.createElement('canvas'); cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
       const cx = cv.getContext('2d'); cx.fillStyle = '#FFFFFF'; cx.fillRect(0, 0, cv.width, cv.height);
@@ -1577,22 +1854,33 @@ async function pdfToPages(file){
     }
     doc.destroy();
     if (pr.cancelled && out.length) toast(`已匯入前 ${out.length} 頁`);
-  } catch(e){ toast('匯入失敗：' + ((e && e.message) || e)); }
-  finally { pr.close(); }
+  } catch(e){ toast(label + '匯入失敗：' + ((e && e.message) || e)); }
+  finally { out.cancelled = pr.cancelled; pr.close(); }
   return out;
 }
 let pdfMode = 'new';
 function pickPdf(mode){ pdfMode = mode; $('#pdfIn').value = ''; $('#pdfIn').click(); }
+/* several PDFs can be picked at once: each becomes its own notebook (or all are inserted in order) */
 $('#pdfIn').addEventListener('change', async () => {
-  const f = $('#pdfIn').files && $('#pdfIn').files[0]; if (!f) return;
-  const ps = await pdfToPages(f); if (!ps.length) return;
-  if (pdfMode === 'insert' && book){
-    const at = curPage() + 1; pages.splice(at, 0, ...ps); relayout(); markMeta(); clampView(); jumpTo(at); toast(`已插入 ${ps.length} 頁`);
-  } else {
-    const now = Date.now(), bk = {id: uid(), title: f.name.replace(/\.pdf$/i, '').trim() || 'PDF 筆記', paper: 'grid', color: 'cream', pages: ps.map(p => p.id), created: now, updated: now};
-    try{ await DB.put('books', bk); } catch(e){ toast('建立失敗：' + ((e && e.message) || e)); return; }
-    openBook(bk.id);
+  const files = Array.from($('#pdfIn').files || []); if (!files.length) return;
+  const insert = pdfMode === 'insert' && !!book, made = [], ins = [];
+  for (let k = 0; k < files.length; k++){
+    const f = files[k], ps = await pdfToPages(f, files.length > 1 ? `第 ${k + 1} / ${files.length} 個檔案　` : '');
+    if (ps.length){
+      if (insert) ins.push(...ps);
+      else {
+        const now = Date.now(), bk = {id: uid(), title: f.name.replace(/\.pdf$/i, '').trim() || 'PDF 筆記', paper: 'grid', color: 'cream', folder: curFolder || null, pages: ps.map(p => p.id), created: now, updated: now};
+        try{ await DB.put('books', bk); made.push(bk); } catch(e){ toast('建立失敗：' + ((e && e.message) || e)); break; }
+      }
+    }
+    if (ps.cancelled) break;
   }
+  if (insert){
+    if (!ins.length || !book) return;
+    const at = curPage() + 1; pages.splice(at, 0, ...ins); relayout(); markMeta(); clampView(); jumpTo(at); toast(`已插入 ${ins.length} 頁`);
+  }
+  else if (made.length === 1) openBook(made[0].id);
+  else if (made.length > 1){ renderLibrary(); toast(`已匯入 ${made.length} 本筆記`); }
 });
 async function renderPageCanvas(pg, widthPx){
   await whenReady(pg);
@@ -1690,9 +1978,9 @@ const ymd = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.
 async function backupAll(){
   const pr = progress('準備備份…');
   try{
-    const books = await DB.all('books'), parts = [], bgIds = new Set();
+    const books = await DB.all('books'), folders = await DB.all('folders'), parts = [], bgIds = new Set();
     if (!books.length){ toast('書架上還沒有筆記本'); return; }
-    parts.push(`{"app":"inknote","v":1,"exported":${Date.now()},"books":[`);
+    parts.push(`{"app":"inknote","v":2,"exported":${Date.now()},"folders":${JSON.stringify(folders || [])},"books":[`);
     for (let b = 0; b < books.length; b++){
       if (pr.cancelled) return;
       const bk = books[b]; pr.set(`備份第 ${b + 1} / ${books.length} 本`, b / books.length);
@@ -1714,6 +2002,9 @@ async function restoreBackup(file){
   try{
     const data = JSON.parse(await file.text());
     if (!data || data.app !== 'inknote' || !Array.isArray(data.books)) throw new Error('這不是手寫筆記的備份檔');
+    for (const f of Array.isArray(data.folders) ? data.folders : []){
+      if (f && typeof f.id === 'string') await DB.put('folders', {id: f.id, title: String(f.title || '資料夾'), parent: typeof f.parent === 'string' ? f.parent : null, created: f.created || Date.now(), updated: f.updated || Date.now()});
+    }
     const bgs = Array.isArray(data.bgs) ? data.bgs : [];
     for (let i = 0; i < bgs.length && !pr.cancelled; i++){
       pr.set(`還原 PDF 頁面 ${i + 1} / ${bgs.length}`, i / Math.max(1, bgs.length) * 0.5);
@@ -1724,7 +2015,7 @@ async function restoreBackup(file){
       if (!bk || typeof bk.id !== 'string' || !Array.isArray(bk.pages) || !pgs) continue;
       pr.set(`還原第 ${i + 1} / ${data.books.length} 本`, 0.5 + i / data.books.length * 0.5);
       for (const p of pgs) if (p && typeof p.id === 'string') await DB.put('pages', {id: p.id, items: Array.isArray(p.items) ? p.items : [], ...(p.h ? {h: p.h} : {}), ...(p.bg ? {bg: p.bg} : {})});
-      await DB.put('books', {id: bk.id, title: String(bk.title || '筆記本'), paper: bk.paper || 'grid', color: bk.color || 'cream', pages: bk.pages, created: bk.created || Date.now(), updated: bk.updated || Date.now()});
+      await DB.put('books', {id: bk.id, title: String(bk.title || '筆記本'), paper: bk.paper || 'grid', color: bk.color || 'cream', folder: typeof bk.folder === 'string' ? bk.folder : null, pages: bk.pages, created: bk.created || Date.now(), updated: bk.updated || Date.now()});
       n++;
     }
     toast(`已還原 ${n} 本筆記`);
@@ -1767,12 +2058,35 @@ function openShareSheet(){
 
 /* ---------- library ---------- */
 async function renderLibrary(){
-  const list = (await DB.all('books')).sort((a, b) => b.updated - a.updated);
+  const [books, folders] = await Promise.all([DB.all('books'), DB.all('folders')]);
+  FOLDERS = folders || [];
+  if (curFolder && !folderById(curFolder)){ curFolder = null; lss('folder', null); }
+  const here = curFolder || null, fids = new Set(FOLDERS.map(f => f.id));
+  const inF = b => (b.folder && fids.has(b.folder) ? b.folder : null), parentOf = f => (f.parent && fids.has(f.parent) ? f.parent : null);
+  const fl = FOLDERS.filter(f => parentOf(f) === here).sort((a, b) => a.title.localeCompare(b.title, 'zh-Hant', {numeric: true}));
+  const list = books.filter(b => inF(b) === here).sort((a, b) => b.updated - a.updated);
   const shelf = $('#shelf'); shelf.innerHTML = '';
-  $('#empty').hidden = !!list.length; $('#db-warn').hidden = DB.ok;
+  $('#lib-title').textContent = here ? folderById(here).title : '筆記';
+  const cr = $('#crumbs'); cr.hidden = !here;
+  if (here){
+    const path = folderPath(here);
+    cr.innerHTML = '<button type="button" data-f="">‹ 筆記</button>' + path.slice(0, -1).map(f => `<span>/</span><button type="button" data-f="${f.id}">${esc(f.title)}</button>`).join('') + `<span>/</span><span>${esc(path[path.length - 1].title)}</span>`;
+  }
+  $('#empty').hidden = !!(list.length || fl.length); $('#db-warn').hidden = DB.ok;
+  $('#empty-msg').textContent = here ? '這個資料夾是空的' : '還沒有筆記本';
+  $('#new-book2').textContent = here ? '新增筆記本或資料夾' : '建立第一本';
+  for (const f of fl){
+    const nB = books.filter(b => inF(b) === f.id).length, nF = FOLDERS.filter(o => parentOf(o) === f.id).length;
+    const card = document.createElement('div'); card.className = 'card';
+    card.innerHTML = `<button type="button" class="cover fcover" aria-label="打開資料夾 ${esc(f.title)}">${svg('folder')}<span class="fc">${nB} 本${nF ? ` · ${nF} 個資料夾` : ''}</span></button><div class="nm"></div><div class="mt">資料夾</div><button type="button" class="ib sm cm" aria-label="資料夾設定">${svg('more')}</button>`;
+    card.querySelector('.nm').textContent = f.title;
+    card.querySelector('.cover').onclick = () => setFolder(f.id);
+    card.querySelector('.cm').onclick = () => folderSheet(f);
+    shelf.appendChild(card);
+  }
   for (const bk of list){
-    const d = new Date(bk.updated), card = document.createElement('div'); card.className = 'card';
-    card.innerHTML = `<button type="button" class="cover" aria-label="打開 ${bk.title.replace(/"/g, '')}"><canvas></canvas></button><div class="nm"></div><div class="mt">${bk.pages.length} 頁 · ${d.getMonth() + 1}/${d.getDate()}</div><button type="button" class="ib sm cm" aria-label="筆記本設定">${svg('more')}</button>`;
+    const d = new Date(bk.updated), card = document.createElement('div'); card.className = 'card'; card.dataset.book = bk.id;
+    card.innerHTML = `<button type="button" class="cover" aria-label="打開 ${esc(bk.title)}"><canvas></canvas></button><div class="nm"></div><div class="mt">${bk.pages.length} 頁 · ${d.getMonth() + 1}/${d.getDate()}</div><button type="button" class="ib sm cm" aria-label="筆記本設定">${svg('more')}</button>`;
     card.querySelector('.nm').textContent = bk.title;
     card.querySelector('.cover').onclick = () => openBook(bk.id);
     card.querySelector('.cm').onclick = () => openBookSheet(bk, false);
@@ -1781,7 +2095,7 @@ async function renderLibrary(){
   }
 }
 async function openBook(id){
-  const bk = await DB.get('books', id); if (!bk) return;
+  const bk = await DB.get('books', id); if (!bk){ dropTab(id); toast('這本筆記已經不在了'); return; }
   const list = await Promise.all(bk.pages.map(pid => DB.get('pages', pid)));
   pages = list.map((p, i) => { const o = {id: bk.pages[i], items: (p && p.items) || [], ver: 0}; if (p && p.h) o.h = p.h; if (p && p.bg) o.bg = p.bg; return o; });
   if (!pages.length) pages = [{id: uid(), items: [], ver: 0}];
@@ -1791,7 +2105,7 @@ async function openBook(id){
   readTheme(); resize();
   const vs = ls('view-' + id, null);
   V.z = fitZ * (vs && vs.rz > 0 ? vs.rz : 1); V.x = 0; V.y = vs ? vs.y : -14 / V.z; clampView();
-  setSaved(true); syncToolbar(); requestRender();
+  setSaved(true); syncToolbar(); addTab(bk); requestRender();
 }
 async function closeBook(){
   commitTA(); clearSel(); closePanel();
@@ -1799,10 +2113,62 @@ async function closeBook(){
   await flush(); book = null; pages = []; cacheClear();
   $('#editor').hidden = true; $('#library').hidden = false; renderLibrary();
 }
+
+/* ---------- recent notebooks as tabs ---------- */
+const MAX_TABS = 8;
+let TABS = (ls('tabs', []) || []).filter(t => t && typeof t.id === 'string'), switching = false;
+const saveTabs = () => lss('tabs', TABS);
+function addTab(bk){
+  const t = TABS.find(x => x.id === bk.id);
+  if (t) t.title = bk.title;
+  else { TABS.push({id: bk.id, title: bk.title}); while (TABS.length > MAX_TABS) TABS.splice(TABS.findIndex(x => x.id !== bk.id), 1); }
+  saveTabs(); renderTabs();
+}
+function renameTab(id, title){ const t = TABS.find(x => x.id === id); if (t && t.title !== title){ t.title = title; saveTabs(); renderTabs(); } }
+function dropTab(id){ const n = TABS.length; TABS = TABS.filter(x => x.id !== id); if (TABS.length !== n){ saveTabs(); renderTabs(); } }
+function renderTabs(){
+  const el = $('#tabs');
+  el.innerHTML = TABS.map(t => `<div class="tab" aria-current="${!!book && book.id === t.id}"><button type="button" class="tt" data-tab="${t.id}">${esc(t.title)}</button><button type="button" class="ib sm" data-tclose="${t.id}" aria-label="關閉分頁 ${esc(t.title)}">${svg('x')}</button></div>`).join('')
+    + `<button type="button" class="ib sm" data-tnew aria-label="打開其他筆記本">${svg('plus')}</button>`;
+  const c = el.querySelector('.tab[aria-current="true"]');
+  if (c){ const l = c.offsetLeft, r = l + c.offsetWidth; if (l < el.scrollLeft) el.scrollLeft = l - 10; else if (r > el.scrollLeft + el.clientWidth) el.scrollLeft = r - el.clientWidth + 10; }
+}
+async function switchBook(id){
+  if (switching || (book && book.id === id)) return;
+  switching = true;
+  try{
+    commitTA(); clearSel(); closePanel(); stopInertia();
+    if (book){ lss('view-' + book.id, {y: V.y, rz: V.z / fitZ}); await flush(); }
+    await openBook(id);
+  } finally { switching = false; }
+}
+async function openBookList(){
+  commitTA(); clearSel(); closePanel();
+  const [books, folders] = await Promise.all([DB.all('books'), DB.all('folders')]); FOLDERS = folders || [];
+  books.sort((a, b) => b.updated - a.updated);
+  const sh = openSheet(`<h2>打開筆記本<button type="button" class="ib sm" data-x aria-label="關閉">${svg('x')}</button></h2>
+    <div class="blist">${books.map(b => `<button type="button" data-open="${b.id}" aria-current="${!!book && book.id === b.id}"><span class="bt">${esc(b.title)}</span><span class="bm">${folderById(b.folder) ? esc(folderLabel(b.folder)) + ' · ' : ''}${b.pages.length} 頁</span></button>`).join('')}</div>`);
+  sh.querySelector('[data-x]').onclick = closeSheet;
+  sh.addEventListener('click', e => { const b = e.target.closest('[data-open]'); if (b){ closeSheet(); switchBook(b.dataset.open); } });
+}
+$('#tabs').addEventListener('click', async e => {
+  const b = e.target.closest('button'); if (!b || switching) return;
+  if (b.dataset.tab) switchBook(b.dataset.tab);
+  else if (b.dataset.tclose){
+    const id = b.dataset.tclose, i = TABS.findIndex(x => x.id === id);
+    if (book && book.id === id){
+      const next = TABS[i + 1] || TABS[i - 1];
+      if (next){ await switchBook(next.id); dropTab(id); } else { dropTab(id); closeBook(); }
+    } else dropTab(id);
+  }
+  else if (b.hasAttribute('data-tnew')) openBookList();
+});
+
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flush(); });
 window.addEventListener('pagehide', () => flush());
-$('#new-book').addEventListener('click', newBookSheet);
-$('#new-book2').addEventListener('click', newBookSheet);
+$('#new-book').addEventListener('click', openAddSheet);
+$('#new-book2').addEventListener('click', () => { if (curFolder) openAddSheet(); else newBookSheet(); });
+$('#crumbs').addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (b) setFolder(b.dataset.f || null); });
 $('#imp-pdf').addEventListener('click', () => pickPdf('new'));
 
 /* ---------- start ---------- */

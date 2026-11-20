@@ -1,5 +1,5 @@
 // 手寫筆記 offline cache. Notes themselves live in IndexedDB, never here.
-const VERSION = '13ad1d8647';
+const VERSION = '0edecb8644';
 const SHELL = 'shell-' + VERSION;
 const LIBS = 'libs-v1';
 const SHELL_FILES = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
